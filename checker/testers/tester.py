@@ -5,7 +5,7 @@ import tempfile
 from abc import abstractmethod
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 
 from ..course import CourseConfig
 from ..exceptions import RunFailedError, TaskTesterTestConfigException, TesterNotImplemented
@@ -111,6 +111,9 @@ class Tester:
         elif system == 'cpp':
             from . import cpp
             return cpp.CppTester(cleanup=cleanup, dry_run=dry_run)
+        elif system == 'clippy':
+            from . import clippy
+            return clippy.ClippyTester(cleanup=cleanup, dry_run=dry_run)
         elif system == 'external':
             path = course_config.tester_path
             if path is None:
@@ -152,6 +155,7 @@ class Tester:
             test_config: TaskTestConfig,
             build_dir: Path,
             verbose: bool = False,
+            source_dir: Optional[Path] = None,
     ) -> None:  # pragma: nocover
         """
         Clean build directory after testing
@@ -170,6 +174,7 @@ class Tester:
             sandbox: bool = False,
             verbose: bool = False,
             normalize_output: bool = False,
+            source_dir: Optional[Path] = None,
     ) -> float:  # pragma: nocover
         """
         Run tests for already built task and return solution score
@@ -233,7 +238,8 @@ class Tester:
                 build_dir,
                 sandbox=True,
                 verbose=verbose,
-                normalize_output=normalize_output
+                normalize_output=normalize_output,
+                source_dir=source_dir,
             )
         except RunFailedError as e:
             print_info('\nOoops... Something went wrong: ' + e.msg + (e.output or ''), color='red')
@@ -243,7 +249,8 @@ class Tester:
                 self._clean_build(
                     test_config,
                     build_dir,
-                    verbose=verbose
+                    verbose=verbose,
+                    source_dir=source_dir,
                 )
             else:
                 print_info(f'Keeping build directory: {build_dir}')
