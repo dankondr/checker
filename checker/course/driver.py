@@ -433,6 +433,6 @@ class CourseDriver:
         elif self.layout == 'flat':
             return path_split[0]
         elif self.layout == 'clippy':
-            return path_split[0]
+            return path_split[1]
         else:
             assert False, 'Not Reachable'  # pragma: no cover
