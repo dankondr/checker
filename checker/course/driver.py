@@ -98,7 +98,7 @@ class CourseDriver:
         * create_or_search - will search template in public folder or will create template from gold solution
     """
 
-    LAYOUTS = ['flat', 'groups', 'lectures']
+    LAYOUTS = ['flat', 'groups', 'lectures', 'clippy']
     TEMPLATES = ['create', 'search', 'create_or_search']
     REPO_TYPES = ['public', 'private']
 
@@ -144,6 +144,8 @@ class CourseDriver:
             deadlines_file_path = self.root_dir / '.deadlines.yml'
         elif self.layout == 'flat':
             deadlines_file_path = self.root_dir / 'tests' / '.deadlines.yml'
+        elif self.layout == 'clippy':
+            deadlines_file_path = self.root_dir / '.deadlines.yml'
         else:
             assert False, 'Not Reachable'  # pragma: no cover
 
@@ -164,6 +166,8 @@ class CourseDriver:
         elif self.layout == 'groups':
             lecture_dir = self.root_dir / 'lectures' / group.name
         elif self.layout == 'flat':
+            lecture_dir = None
+        elif self.layout == 'clippy':
             lecture_dir = None
         else:
             assert False, 'Not Reachable'  # pragma: no cover
@@ -189,6 +193,8 @@ class CourseDriver:
             review_dir = self.root_dir / 'solutions' / group.name
         elif self.layout == 'flat':
             review_dir = None
+        elif self.layout == 'clippy':
+            review_dir = None
         else:
             assert False, 'Not Reachable'  # pragma: no cover
 
@@ -211,6 +217,8 @@ class CourseDriver:
             group_root_dir = self.root_dir / group.name
         elif self.layout == 'flat':
             group_root_dir = None
+        elif self.layout == 'clippy':
+            group_root_dir = self.root_dir / group.name
         else:
             assert False, 'Not Reachable'  # pragma: no cover
 
@@ -232,6 +240,8 @@ class CourseDriver:
         elif self.layout == 'groups':
             task_root_dir = self.root_dir / task.group.name / task.name
         elif self.layout == 'flat':
+            task_root_dir = self.root_dir / task.name
+        elif self.layout == 'clippy':
             task_root_dir = self.root_dir / task.name
         else:
             assert False, 'Not Reachable'  # pragma: no cover
@@ -264,6 +274,8 @@ class CourseDriver:
                 task_solution_dir = self.root_dir / 'tests' / task.name
             else:
                 task_solution_dir = self.root_dir / task.name
+        elif self.layout == 'clippy':
+            task_solution_dir = self.root_dir / task.name
         else:
             assert False, 'Not Reachable'  # pragma: no cover
 
@@ -291,6 +303,9 @@ class CourseDriver:
         elif self.layout == 'flat':
             # both public and private
             task_template_dir = self.root_dir / task.name
+        elif self.layout == 'clippy':
+            # both public and private
+            task_template_dir = self.root_dir / task.name
         else:
             assert False, 'Not Reachable'  # pragma: no cover
 
@@ -316,6 +331,9 @@ class CourseDriver:
             # both public and private
             public_tests_dir = self.root_dir / task.group.name / task.name
         elif self.layout == 'flat':
+            # both public and private
+            public_tests_dir = self.root_dir / task.name
+        elif self.layout == 'clippy':
             # both public and private
             public_tests_dir = self.root_dir / task.name
         else:
@@ -349,6 +367,11 @@ class CourseDriver:
                 private_tests_dir = self.root_dir / 'tests' / task.name
             else:
                 private_tests_dir = None
+        elif self.layout == 'clippy':
+            if self.repo_type == 'private':
+                private_tests_dir = self.root_dir / task.name
+            else:
+                private_tests_dir = None
         else:
             assert False, 'Not Reachable'  # pragma: no cover
 
@@ -380,6 +403,11 @@ class CourseDriver:
                 config_dir = self.root_dir / 'tests' / task.name
             else:
                 config_dir = None
+        elif self.layout == 'clippy':
+            if self.repo_type == 'private':
+                config_dir = self.root_dir / task.name
+            else:
+                config_dir = None
         else:
             assert False, 'Not Reachable'  # pragma: no cover
 
@@ -403,6 +431,8 @@ class CourseDriver:
         elif self.layout == 'groups':
             return path_split[1]
         elif self.layout == 'flat':
+            return path_split[0]
+        elif self.layout == 'clippy':
             return path_split[0]
         else:
             assert False, 'Not Reachable'  # pragma: no cover
