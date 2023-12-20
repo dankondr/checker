@@ -166,7 +166,7 @@ def grade(
         course_config,
         course_schedule,
         public_course_driver,
-        private_course_driver,
+        public_course_driver,
         tester,
         test_full_groups=test_full_groups,
     )
