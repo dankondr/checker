@@ -218,7 +218,7 @@ class CourseDriver:
         elif self.layout == 'flat':
             group_root_dir = None
         elif self.layout == 'clippy':
-            group_root_dir = self.root_dir / group.name
+            group_root_dir = self.root_dir / 'tasks' / group.name
         else:
             assert False, 'Not Reachable'  # pragma: no cover
 
@@ -242,7 +242,7 @@ class CourseDriver:
         elif self.layout == 'flat':
             task_root_dir = self.root_dir / task.name
         elif self.layout == 'clippy':
-            task_root_dir = self.root_dir / task.name
+            task_root_dir = self.root_dir / 'tasks' / task.name
         else:
             assert False, 'Not Reachable'  # pragma: no cover
 
@@ -275,7 +275,7 @@ class CourseDriver:
             else:
                 task_solution_dir = self.root_dir / task.name
         elif self.layout == 'clippy':
-            task_solution_dir = self.root_dir / task.name
+            task_solution_dir = self.root_dir / 'tasks' / task.name
         else:
             assert False, 'Not Reachable'  # pragma: no cover
 
@@ -305,7 +305,7 @@ class CourseDriver:
             task_template_dir = self.root_dir / task.name
         elif self.layout == 'clippy':
             # both public and private
-            task_template_dir = self.root_dir / task.name
+            task_template_dir = self.root_dir / 'tasks' / task.name
         else:
             assert False, 'Not Reachable'  # pragma: no cover
 
@@ -335,7 +335,7 @@ class CourseDriver:
             public_tests_dir = self.root_dir / task.name
         elif self.layout == 'clippy':
             # both public and private
-            public_tests_dir = self.root_dir / task.name
+            public_tests_dir = self.root_dir / 'tasks' / task.name
         else:
             assert False, 'Not Reachable'  # pragma: no cover
 
@@ -369,7 +369,7 @@ class CourseDriver:
                 private_tests_dir = None
         elif self.layout == 'clippy':
             if self.repo_type == 'private':
-                private_tests_dir = self.root_dir / task.name
+                private_tests_dir = self.root_dir / 'tasks' / task.name
             else:
                 private_tests_dir = None
         else:
@@ -405,7 +405,7 @@ class CourseDriver:
                 config_dir = None
         elif self.layout == 'clippy':
             if self.repo_type == 'private':
-                config_dir = self.root_dir / task.name
+                config_dir = self.root_dir / 'tasks' / task.name
             else:
                 config_dir = None
         else:
