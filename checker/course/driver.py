@@ -371,7 +371,7 @@ class CourseDriver:
             if self.repo_type == 'private':
                 private_tests_dir = self.root_dir / 'tasks' / task.name
             else:
-                private_tests_dir = None
+                private_tests_dir = self.root_dir / 'tasks' / task.name
         else:
             assert False, 'Not Reachable'  # pragma: no cover
 
@@ -407,7 +407,7 @@ class CourseDriver:
             if self.repo_type == 'private':
                 config_dir = self.root_dir / 'tasks' / task.name
             else:
-                config_dir = None
+                config_dir = self.root_dir / 'tasks' / task.name
         else:
             assert False, 'Not Reachable'  # pragma: no cover
 
