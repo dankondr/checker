@@ -70,7 +70,7 @@ class ClippyTester(Tester):
             verbose: bool = False,
             normalize_output: bool = False,
     ) -> float:
-        tests_cmd = ['clippy', 'test']
+        tests_cmd = ['/opt/shad/clippy/bin/clippy', 'test']
 
         tests_err = None
         try:
