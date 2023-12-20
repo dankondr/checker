@@ -63,8 +63,10 @@ def copy_files(
                     ignore_patterns=ignore_patterns,
                 )
                 continue
-
-            shutil.copyfile(str(source_path), str(target_path))
+            try:
+                shutil.copyfile(str(source_path), str(target_path))
+            except shutil.SameFileError:
+                pass
 
 
 def check_file_contains_regexp(
