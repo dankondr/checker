@@ -79,7 +79,6 @@ class ClippyTester(Tester):
                 cmake_cmd,
                 sandbox=sandbox,
                 cwd=str(source_dir),
-                timeout=test_config.test_timeout,
                 verbose=verbose,
                 capture_output=True,
             )
