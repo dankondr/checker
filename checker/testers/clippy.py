@@ -70,6 +70,28 @@ class ClippyTester(Tester):
             verbose: bool = False,
             normalize_output: bool = False,
     ) -> float:
+        cmake_cmd = ['/opt/shad/clippy/bin/clippy', 'cmake']
+
+        cmake_err = None
+        try:
+            print_info('Running cmake...', color='orange')
+            cmake_output = self._executor(
+                cmake_cmd,
+                sandbox=sandbox,
+                cwd=str(source_dir),
+                timeout=test_config.test_timeout,
+                verbose=verbose,
+                capture_output=True,
+            )
+            print_info(cmake_output, end='')
+        except ExecutionFailedError as e:
+            cmake_err = e
+            print_info(e.output, end='')
+            print_info('ERROR', color='red')
+
+        if cmake_err is not None:
+            raise TestsFailedError('Cmake error', output=cmake_err.output) from cmake_err
+
         tests_cmd = ['/opt/shad/clippy/bin/clippy', 'test']
 
         tests_err = None
