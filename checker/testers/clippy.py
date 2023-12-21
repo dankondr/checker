@@ -12,7 +12,7 @@ from .tester import Tester
 class ClippyTester(Tester):
     @dataclass
     class TaskTestConfig(Tester.TaskTestConfig):
-        test_timeout: int = 60  # seconds
+        test_timeout: int = 300  # seconds
 
         public_test_files: list[str] = field(default_factory=list)
         private_test_files: list[str] = field(default_factory=list)
