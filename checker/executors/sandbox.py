@@ -22,7 +22,7 @@ from ..utils.print import print_info
 
 
 class Sandbox:
-    ENV_WHITELIST = ['PATH']
+    ENV_WHITELIST = ['PATH', 'CLIPPY_CI']
 
     def __init__(
             self,
